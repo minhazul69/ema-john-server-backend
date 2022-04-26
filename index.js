@@ -42,14 +42,15 @@ async function run() {
       const count = await productCollection.estimatedDocumentCount();
       res.send({ count });
     });
-      app.post("/productByKeys", async (req, res) => {
-        const keys = req.body;
-        const ids = keys.map((id) => ObjectId(id));
-        const query = { _id: { $in: ids } };
-        const cursor = productCollection.find(query);
-        const products = await cursor.toArray();
-        res.send(products);
-      });
+    app.post("/productByKeys", async (req, res) => {
+      const keys = req.body;
+      const ids = keys.map((id) => ObjectId(id));
+      const query = { _id: { $in: ids } };
+      console.log(query);
+      const cursor = productCollection.find(query);
+      const products = await cursor.toArray();
+      res.send(products);
+    });
   } finally {
   }
 }
