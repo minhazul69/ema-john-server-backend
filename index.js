@@ -46,7 +46,6 @@ async function run() {
       const keys = req.body;
       const ids = keys.map((id) => ObjectId(id));
       const query = { _id: { $in: ids } };
-      console.log(query);
       const cursor = productCollection.find(query);
       const products = await cursor.toArray();
       res.send(products);
