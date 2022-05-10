@@ -23,8 +23,8 @@ async function run() {
     await client.connect();
     const productCollection = client.db("emaJohn").collection("product");
     app.get("/product", async (req, res) => {
-      const page = parseInt(req.query.page);
-      const size = parseInt(req.query.size);
+      const page = parseInt(req?.query?.page);
+      const size = parseInt(req?.query?.size);
       const query = {};
       const cursor = productCollection.find(query);
       let products;
@@ -44,6 +44,7 @@ async function run() {
     });
     app.post("/productByKeys", async (req, res) => {
       const keys = req.body;
+
       const ids = keys.map((id) => ObjectId(id));
       const query = { _id: { $in: ids } };
       const cursor = productCollection.find(query);
